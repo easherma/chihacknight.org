@@ -3,8 +3,8 @@ backend:
   branch: master # Branch to update (optional; defaults to master)
   site_domain: chihacknight.netlify.com
 
-media_folder: "images/uploads" # Media files will be stored in the repo under images/uploads
-
+media_folder: "images/" # Media files will be stored in the repo under images/uploads
+publish_mode: editorial_workflow
 
 collections:
   - name: "events" # Used in routes, e.g. /admin/collections/blog
@@ -13,9 +13,20 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template i.e. YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
-      - {label: "layout" , name: "layout" , widget: "hidden", default: "event"}
-      - {label: "Categories", name: "categories", widget: "hidden", default: "events"}
+      - {label: "layout" , name: "layout" , widget: "select", options: ["event", "satellite_event"], default: "event"}
+      - {label: "Categories", name: "categories", widget: "select", options: ["events", "satellite"], default: "events"}
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "string"}
+      # - list of people, could be relation link to 'people'
+      #event image
+      #event date
+      #event id
+      # youtube id
+      #Agenda
+      # sponsors
+      # asl
+      # tags
+      #published  
       - {label: "Body", name: "body", widget: "markdown"}
   - name: "blog" # Used in routes, e.g. /admin/collections/blog
     label: "Blog" # Used in the UI
